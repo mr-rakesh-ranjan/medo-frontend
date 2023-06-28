@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { doLogout, getCurrentCustomerDetails, isLoggedIn } from '../../auth';
-import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from 'reactstrap';
+import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input } from 'reactstrap';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import baseURL from '../../apis/apiCon';
 
 
 const NavBar = ({ direction, ...args }) => {
@@ -19,27 +21,63 @@ const NavBar = ({ direction, ...args }) => {
     const [user, setUser] = useState(undefined)
 
     useEffect(() => {
-
         setLogin(isLoggedIn())
         setUser(getCurrentCustomerDetails())
-
     }, [login])
 
     //logout function
     const logout = () => {
-        doLogout( () =>{
+        doLogout(() => {
             //logged out
             setLogin(false)
             navigate("/")
         })
     }
 
+    //Search bar implementation
+    const [medicine, setMedicine] = useState([]);
+    const [searchInput, setSearchInput] = useState("")
+    const searchHandler = (e) => {
+        e.preventDefault();
+        let value = e.target.value;
+        setSearchInput(value);
+    }
+
+    const filterData = medicine.filter((el) => {
+        if(searchInput === ''){
+            return el;
+        }  else {
+            return el.medicine.medicineName.toLowerCase().includes(searchInput)
+        }
+    })
+
+    useEffect(() => {
+        const headers = {
+            "Content-Type": "application/json",
+        };
+
+        const fetchMedicines = async () => {
+            try {
+                const response = await axios.get(`${baseURL}/api/v1/public/medicine/all`, { headers });
+                if (response) {
+                    // console.log(Object.keys(response.data).length); //for debugging purpose
+                    if (response.data) {
+                        setMedicine(response.data)
+                        // console.log(response.data); //for debugging purpose
+                    } else {
+                        console.log("No medicines found");
+                    }
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        fetchMedicines();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-secondary">
             <div className="container">
-                <Link className="navbar-brand" to="/">
-                    Medo
-                </Link>
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -69,28 +107,45 @@ const NavBar = ({ direction, ...args }) => {
                                 Contact
                             </NavLink>
                         </li>
+                        <li>
+                            <Input type='text' placeholder='Search Medicine' onChange={searchHandler} value={searchInput} />
+                        </li>
+                        <li>
+                            <button type='btn' className='mx-3 btn btn-info'>Search</button>
+                        </li>
+                        
+                            {
+                                filterData.map((item) => {
+                                    <li key={item.medicineId} >
+                                        {medicine.medicineName}
+                                    </li>
+                                })
+                            }
+                        
+
                     </ul>
                 </div>
+
 
                 {
                     login && (
                         <>
-                            <Link className="btn btn-outline-light ">Cart</Link>
+                            <Link className="btn btn-outline-light" exact to={"/customer/cart"}>Cart</Link>
                             <Dropdown className="px-1" isOpen={dropdownOpen} toggle={toggle} direction={direction}>
                                 <DropdownToggle caret>User</DropdownToggle>
                                 <DropdownMenu {...args}>
                                     <DropdownItem tag={Link} exact to="/customer/dashboard">
-                                    {user.email}
+                                        {user.email}
                                     </DropdownItem>
                                     <DropdownItem divider />
                                     <DropdownItem tag={Link} exact to="/customer/order">
                                         My Order
                                     </DropdownItem>
                                     <DropdownItem tag={Link} exact to="/customer/profile-info" >
-                                    Profile
+                                        Profile
                                     </DropdownItem>
                                     <DropdownItem onClick={logout}>
-                                    Logout
+                                        Logout
                                     </DropdownItem>
                                 </DropdownMenu>
                             </Dropdown>
@@ -110,7 +165,7 @@ const NavBar = ({ direction, ...args }) => {
 
 
             </div>
-        </nav >
+        </nav>
     )
 }
 

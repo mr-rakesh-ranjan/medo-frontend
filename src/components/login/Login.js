@@ -38,7 +38,7 @@ const Login = () => {
 
             //saved token to the localstorage
             doLogin(res.data, () => {
-                console.log("login detail is saved to the localstorage");
+                // console.log("login detail is saved to the localstorage"); //for debugging purpose
                 //redirect the customer to dashboard page
                 navigate("/customer/dashboard")
 

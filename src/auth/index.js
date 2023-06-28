@@ -32,3 +32,12 @@ export const getCurrentCustomerDetails = () => {
     }
 
 }
+
+export const getCurrentToken = () => {
+    if(isLoggedIn()) {
+        // console.log(JSON.parse(localStorage.getItem("data"))); //for debugging purpose
+        return JSON.parse(localStorage.getItem("data"))?.token;
+    } else {
+        return undefined;
+    }
+}
