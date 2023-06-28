@@ -5,10 +5,8 @@ import CarouselLoader from '../layout/Carousel'
 const Home = () => {
     return (
         <>
-            <CarouselLoader className="mt-3" />
+            <CarouselLoader className="mt-3 text-center" />
             <Medicines/>
-
-            {/* <div>this is home page</div> */}
         </>
     )
 }

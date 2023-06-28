@@ -45,7 +45,7 @@ const Signup = () => {
             phoneNumber: custData.phoneNumber,
             password: custData.password
         }).then(res => {
-            // console.log(res.data); //for debugging
+            console.log(res.data); //for debugging
             //saved token to the localstorage
             doLogin(res.data, () => {
                 console.log("login detail is saved to the localstorage");
