@@ -51,6 +51,7 @@ const Signup = () => {
                 console.log("login detail is saved to the localstorage");
                 //redirect the customer to dashboard page
                 navigate("/customer/dashboard")
+                window.location.reload(false);
             })
         }).catch(err => {
             console.log(err);

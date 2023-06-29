@@ -84,7 +84,7 @@ const AllAddress = () => {
                             <CardHeader>Address {i + 1}</CardHeader>
                             <CardBody>
                                 <CardText>
-                                    <p><strong>Flat number:</strong> {addresses[key].flatNo}, <strong>Street Name : </strong> {addresses[key].streetName} <strong> Locality : </strong> {addresses[key].locality} <strong>City : </strong> {addresses[key].city}, <strong>Pincode : </strong> {addresses[key].pincode} <strong> State : </strong> {addresses[key].state}</p>
+                                    <p><strong>Flat number:</strong> {addresses[key].flatNo}, <strong>Street Name : </strong> {addresses[key].streetName} <strong> Locality : </strong> {addresses[key].locality} <strong>City : </strong> {addresses[key].city}, <strong> State : </strong> {addresses[key].state}, <strong>Pincode : </strong> {addresses[key].pincode}</p>
                                 </CardText>
                             </CardBody>
                             <CardFooter className='text-center'>

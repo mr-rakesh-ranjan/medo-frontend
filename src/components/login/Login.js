@@ -41,6 +41,7 @@ const Login = () => {
                 // console.log("login detail is saved to the localstorage"); //for debugging purpose
                 //redirect the customer to dashboard page
                 navigate("/customer/dashboard")
+                window.location.reload(false);
 
             })
 

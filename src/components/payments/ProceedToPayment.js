@@ -50,6 +50,11 @@ const ProceedToPayment = () => {
         navigate("/customer/delivery-address", totalPrice)
     }
 
+    //place order
+    const placeOrder = () => {
+        
+    }
+
 
 
     return (
@@ -96,7 +101,7 @@ const ProceedToPayment = () => {
                                                 Your total amount for pay : {totalPrice}
                                             </h5>
                                         </div>
-                                        <Link className='btn btn-primary' state={paymentMethodState} to={"/customer/payment-success"} onClick={() => cashPaymentHandler()}>Confirm</Link>
+                                        <Link className='btn btn-primary' state={paymentMethodState} to={"/customer/payment-success"} onClick={() => {cashPaymentHandler(); placeOrder()}}>Confirm</Link>
                                     </>
                                 ) : rSelected === 2 ? (
                                     <>
