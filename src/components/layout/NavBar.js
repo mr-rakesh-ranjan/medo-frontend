@@ -107,12 +107,12 @@ const NavBar = ({ direction, ...args }) => {
                                 Contact
                             </NavLink>
                         </li>
-                        <li>
+                        {/* <li>
                             <Input type='text' placeholder='Search Medicine' onChange={searchHandler} value={searchInput} />
                         </li>
                         <li>
                             <button type='btn' className='mx-3 btn btn-info'>Search</button>
-                        </li>
+                        </li> */}
                         
                             {
                                 filterData.map((item) => {

@@ -88,6 +88,10 @@ const SelectAddress = () => {
         navigate("/customer/payments", { state: selectAddressState })
     }
 
+    const updateAddress = (address) => {
+        navigate("/customer/update-address", {state : address} )
+    }
+
     return (
         <>
             <div className="conatiner mt-3">
@@ -122,7 +126,7 @@ const SelectAddress = () => {
                                         >
                                             Select Address
                                         </button>
-                                        <button type="button" class="btn btn-warning">Edit Address</button>
+                                        <button type="button" class="btn btn-warning" onClick={() => updateAddress(addresses[key])}>Update Address</button>
                                     </CardFooter>
                                 </Card>
                             ))
@@ -141,7 +145,7 @@ const SelectAddress = () => {
                     <li>You can add more than one addresses.</li>
                 </ul>
             </div>
-            <ToastContainer/>
+            <ToastContainer />
         </>
     )
 }

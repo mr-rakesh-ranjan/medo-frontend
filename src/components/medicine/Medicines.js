@@ -75,7 +75,7 @@ const Medicines = () => {
                                             {medicine[key].medicineCompany}
                                         </CardSubtitle>
                                         <CardText>
-                                            <strong>Price : {medicine[key].price}</strong><br />
+                                            <strong>Price : ₹ {medicine[key].price}</strong><br />
                                             Medicine Type : {medicine[key].medicineType}<br />
                                             Manufacturing Date : {medicine[key].manufacturingDate}<br />
                                             Expiry Date : {medicine[key].expiryDate}

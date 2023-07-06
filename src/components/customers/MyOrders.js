@@ -65,6 +65,7 @@ const MyOrders = () => {
     const customerId = getCurrentCustomerDetails().customerId;
     // console.log(customerId); //for debugging purpose
 
+    const address = getCurrentCustomerDetails().address;
 
     const config = {
         headers: {
@@ -108,6 +109,11 @@ const MyOrders = () => {
                     <div className="col-md-6">
                         <h1>My Orders</h1>
                         {
+                            !orders && address && (
+                                <h2 className='text-center'>No purchase found</h2>
+                            )
+                        }
+                        {
                             orders && (Object.keys(orders).map((key, i) => (
                                 <Card className="m-3" key={i}>
                                     <CardHeader>Order {i + 1}</CardHeader>
@@ -125,15 +131,8 @@ const MyOrders = () => {
                                             <Card className='mt-3'>
                                                 <CardHeader>{`Items Ordered:`}</CardHeader>
                                                 <CardBody>
-                                                    <ul>
-                                                    {
-                                                        orders[key].medicines.map((l, t) =>{
-
-                                                            <li key={t}>{orders[0].medicines[0].medicineName}</li>
-                                                            
-                                                        })
-                                                    }
-                                                    </ul>
+                                                    
+                                                    
                                                 </CardBody>
                                             </Card>
                                         </CardText>
@@ -144,10 +143,38 @@ const MyOrders = () => {
                                 </Card>
                             )))
                         }
+
+                        {/* {orders.map((order) => (
+                            <div key={order.orderId}>
+                                <h3>Order ID: {order.orderId}</h3>
+                                <p>Created Date: {order.createdDate}</p>
+                                <p>Status: {order.status}</p>
+                                <p>Payment Method: {order.paymentMethod}</p>
+                                <p>Total Price: {order.totalPrice}</p>
+                                <h4>Address:</h4>
+                                <p>Flat No: {order.address.flatNo}</p>
+                                <p>Street Name: {order.address.streetName}</p>
+                                <p>Locality: {order.address.locality}</p>
+                                <p>Pincode: {order.address.pincode}</p>
+                                <p>City: {order.address.city}</p>
+                                <p>State: {order.address.state}</p>
+                                <h4>Medicines:</h4>
+                                {order.medicines.map((medicine) => (
+                                    <div key={medicine.medId}>
+                                        <p>Medicine ID: {medicine.medId}</p>
+                                        <p>Medicine Name: {medicine.medicineName}</p>
+                                        <p>Medicine Company: {medicine.medicineCompany}</p>
+                                        <p>Price: {medicine.price}</p>
+                                        <p>Medicine Type: {medicine.medicineType}</p>
+                                        <p>Manufacturing Date: {medicine.manufacturingDate}</p>
+                                        <p>Expiry Date: {medicine.expiryDate}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        ))} */}
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

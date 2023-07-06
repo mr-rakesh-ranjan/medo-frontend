@@ -103,9 +103,10 @@ const Cart = () => {
                                                     <th scope="row">{++i}</th>
                                                     <td>{cart[key].medicineName}</td>
                                                     <td>{cart[key].medicineCompany}</td>
-                                                    <td>₹{cart[key].price}</td>
+                                                    <td>₹ {cart[key].price}</td>
                                                     <td><button className='btn btn-info' onClick={() => removeItemFromCart(key)}>Remove Item</button>
-                                                        <button className='btn btn-info mx-3' onClick={() => repeatItemFromCart(key)}>Repeat Item</button></td>
+                                                        <button className='btn btn-info mx-3' onClick={() => repeatItemFromCart(key)}>Repeat Item</button>
+                                                    </td>
                                                 </tr>
                                             ))
                                         )
@@ -114,13 +115,13 @@ const Cart = () => {
                             </Table>
                             <div className="float-right" >
                                 <h5>
-                                    Total Price : {totalPrice}
+                                    Total Price : ₹ {totalPrice}
                                 </h5>
                             </div>
                             <div className="float-right">
                                 <a type="btn" className="btn btn-danger mx-1" onClick={() => removeAllItems()} >Remove all medicine</a>
                                 {/* <Link type="btn" className="btn btn-primary mx-1" state={totalPrice} to={"/customer/payments"} onClick={proceedToPayment} >Procceed to Payment</Link> */}
-                                <Link type="btn" className="btn btn-primary mx-1" state={totalPrice} to={"/customer/delivery-address"} onClick={selectAddress} >Select Address to Delivery</Link>
+                                <Link type="btn" className="btn btn-primary mx-1" state={totalPrice} to={"/customer/delivery-address"} onClick={() => { selectAddress(); removeAllItems() }} >Select Address to Delivery</Link>
                             </div>
                         </>
                     )
